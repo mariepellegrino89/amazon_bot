@@ -1,8 +1,8 @@
 package com.mpellegrino.amazon_bot.manager.impl;
 
-import com.mpellegrino.amazon_bot.bean.AmazonBotConfig;
+import com.mpellegrino.amazon_bot.bean.common.AmazonBotConfig;
 import com.mpellegrino.amazon_bot.bean.product.Product;
-import com.mpellegrino.amazon_bot.manager.ProductRunnable;
+import com.mpellegrino.amazon_bot.manager.runnable.ProductRunnable;
 import com.mpellegrino.amazon_bot.manager.interf.AmazonBotRunner;
 import com.mpellegrino.amazon_bot.utils.AmazonProductUtils;
 import org.apache.logging.log4j.LogManager;

@@ -1,4 +1,4 @@
-package com.mpellegrino.amazon_bot.utils;
+package com.mpellegrino.amazon_bot.bean.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

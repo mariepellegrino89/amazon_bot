@@ -1,4 +1,4 @@
-package com.mpellegrino.amazon_bot.utils.exceptions;
+package com.mpellegrino.amazon_bot.exceptions;
 
 public class CustomDeserializationException extends Exception {
 

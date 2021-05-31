@@ -1,6 +1,6 @@
 package com.mpellegrino.amazon_bot.bean.product;
 
-import com.mpellegrino.amazon_bot.bean.AmazonBotConfig;
+import com.mpellegrino.amazon_bot.bean.common.AmazonBotConfig;
 import com.mpellegrino.amazon_bot.bean.shipping.BPMPowerShippingMode;
 import com.mpellegrino.amazon_bot.bean.visitor.AutoBuyBotVisitor;
 import com.mpellegrino.amazon_bot.bean.visitor.VisitableProduct;

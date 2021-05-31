@@ -1,6 +1,6 @@
-package com.mpellegrino.amazon_bot.manager;
+package com.mpellegrino.amazon_bot.manager.runnable;
 
-import com.mpellegrino.amazon_bot.bean.AmazonBotConfig;
+import com.mpellegrino.amazon_bot.bean.common.AmazonBotConfig;
 import com.mpellegrino.amazon_bot.bean.product.Product;
 import com.mpellegrino.amazon_bot.bean.visitor.AutoBuyBotConcreteVisitor;
 import com.mpellegrino.amazon_bot.bean.visitor.AutoBuyBotVisitor;

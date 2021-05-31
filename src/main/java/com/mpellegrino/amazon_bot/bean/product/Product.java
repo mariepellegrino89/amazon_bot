@@ -2,12 +2,9 @@ package com.mpellegrino.amazon_bot.bean.product;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.mpellegrino.amazon_bot.bean.AmazonBotConfig;
 import com.mpellegrino.amazon_bot.bean.visitor.VisitableProduct;
-import lombok.Data;
 import lombok.ToString;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.springframework.stereotype.Component;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

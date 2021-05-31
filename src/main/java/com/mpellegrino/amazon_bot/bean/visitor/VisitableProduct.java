@@ -1,6 +1,6 @@
 package com.mpellegrino.amazon_bot.bean.visitor;
 
-import com.mpellegrino.amazon_bot.bean.AmazonBotConfig;
+import com.mpellegrino.amazon_bot.bean.common.AmazonBotConfig;
 import com.mpellegrino.amazon_bot.manager.impl.EmailServiceImpl;
 import com.mpellegrino.amazon_bot.utils.AmazonProductUtils;
 

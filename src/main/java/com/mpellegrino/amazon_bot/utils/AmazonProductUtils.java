@@ -1,9 +1,9 @@
 package com.mpellegrino.amazon_bot.utils;
 
-import com.mpellegrino.amazon_bot.bean.AmazonBotConfig;
+import com.mpellegrino.amazon_bot.bean.common.AmazonBotConfig;
+import com.mpellegrino.amazon_bot.bean.common.AmazonOrderAndBuyResponse;
 import com.mpellegrino.amazon_bot.bean.product.AmazonProduct;
 import com.mpellegrino.amazon_bot.bean.product.Product;
-import com.mpellegrino.amazon_bot.bean.visitor.AutoBuyBotConcreteVisitor;
 import com.mpellegrino.amazon_bot.manager.impl.EmailServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 

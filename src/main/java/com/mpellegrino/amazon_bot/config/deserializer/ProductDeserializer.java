@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.mpellegrino.amazon_bot.bean.product.AmazonProduct;
 import com.mpellegrino.amazon_bot.bean.product.BpmPowerProduct;
 import com.mpellegrino.amazon_bot.bean.product.Product;
-import com.mpellegrino.amazon_bot.utils.exceptions.CustomDeserializationException;
+import com.mpellegrino.amazon_bot.exceptions.CustomDeserializationException;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

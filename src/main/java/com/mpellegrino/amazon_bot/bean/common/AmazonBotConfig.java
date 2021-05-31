@@ -1,4 +1,4 @@
-package com.mpellegrino.amazon_bot.bean;
+package com.mpellegrino.amazon_bot.bean.common;
 
 import com.mpellegrino.amazon_bot.bean.product.Product;
 import lombok.Data;
