@@ -33,7 +33,7 @@ public class AmazonProductUtils {
     public static Logger logger = LogManager.getLogger(AmazonProductUtils.class);
 
 
-    public AmazonOrderAndBuyResponse orderAndBuy(AmazonBotConfig amazonBotConfig, AmazonProduct product, ExecutorService executor)  {
+    public AmazonOrderAndBuyResponse orderAndBuy(AmazonBotConfig amazonBotConfig, AmazonProduct product, ExecutorService executor) {
         AmazonOrderAndBuyResponse amazonOrderAndBuyResponse = new AmazonOrderAndBuyResponse(false, false);
         try {
             logger.info("Order and buy process starting for item {}", product.getTitle());
@@ -62,38 +62,37 @@ public class AmazonProductUtils {
             logger.info("Checks have been performed on multiple threads for item to have been bought, proceeding.");
 
             //check different buttons
-        Optional<WebElement> proceedToRetailCheckout = product.getChromeDriver().findElements(By.name("proceedToRetailCheckout"))
-                .stream()
-                .filter(w -> w.isDisplayed() && w.isEnabled())
-                .findAny();
-        proceedToRetailCheckout.ifPresent(webElement -> {
-            new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(webElement)).click();
-            amazonOrderAndBuyResponse.setItemBought(true);
-        });
+            Optional<WebElement> proceedToRetailCheckout = product.getChromeDriver().findElements(By.name("proceedToRetailCheckout"))
+                    .stream()
+                    .filter(w -> w.isDisplayed() && w.isEnabled())
+                    .findAny();
+            proceedToRetailCheckout.ifPresent(webElement -> {
+                new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(webElement)).click();
+                amazonOrderAndBuyResponse.setItemBought(true);
+            });
 
-        Optional<WebElement> proceedToCheckOutAction = product.getChromeDriver().findElements(By.id("proceed-to-checkout-action"))
-                .stream()
-                .filter(w -> w.isDisplayed() && w.isEnabled())
-                .findAny();
-        proceedToCheckOutAction.ifPresent(webElement -> {
-            new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(webElement)).click();
-            amazonOrderAndBuyResponse.setItemBought(true);
-        });
+            Optional<WebElement> proceedToCheckOutAction = product.getChromeDriver().findElements(By.id("proceed-to-checkout-action"))
+                    .stream()
+                    .filter(w -> w.isDisplayed() && w.isEnabled())
+                    .findAny();
+            proceedToCheckOutAction.ifPresent(webElement -> {
+                new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(webElement)).click();
+                amazonOrderAndBuyResponse.setItemBought(true);
+            });
 
-        Optional<WebElement> placeYourOrder1 = product.getChromeDriver().findElements(By.name("placeYourOrder1"))
-                .stream()
-                .filter(w -> w.isDisplayed() && w.isEnabled())
-                .findAny();
-        placeYourOrder1.ifPresent(webElement -> {
-            new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(webElement)).click();
-            amazonOrderAndBuyResponse.setItemBought(true);
-        });
-            amazonOrderAndBuyResponse.setItemBought(true);
+            Optional<WebElement> placeYourOrder1 = product.getChromeDriver().findElements(By.name("placeYourOrder1"))
+                    .stream()
+                    .filter(w -> w.isDisplayed() && w.isEnabled())
+                    .findAny();
+            placeYourOrder1.ifPresent(webElement -> {
+                new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(webElement)).click();
+                amazonOrderAndBuyResponse.setItemBought(true);
+            });
             if (!amazonOrderAndBuyResponse.isItemBought()) {
                 emailService.sendMail(mailDev, "ERROR AUTOBUY BOT SERVICE", "Error in bot item proceed to buy button, check item with title " + product.getTitle() + " and url " + product.getUrl());
                 logger.error("No buttons for proceeding to buy item has been found, check webpage for item {}", product.getTitle());
             }
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             logger.error("Thread {} interrupted by outside ", Thread.currentThread().getName());
         }
         return amazonOrderAndBuyResponse;
@@ -116,7 +115,7 @@ public class AmazonProductUtils {
         new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(continueButton)).click();
         Thread.sleep(2000L);
         WebElement inputPw = product.getChromeDriver().findElement(By.id("ap_password"));
-        inputPw.sendKeys(product.getAccountPasswordEnc());
+        inputPw.sendKeys(product.getAccountPassword());
         WebElement signInSubmit = product.getChromeDriver().findElement(By.id("signInSubmit"));
         new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(signInSubmit)).click();
         logger.info("Login process ended for item {}", product.getTitle());

@@ -3,32 +3,14 @@
   "products": [
     {
       "title": "test1",
-      "url": "https://www.amazon.it/AmazonBasics-velocit%C3%A0-supporta-Ethernet-standard/dp/B014I8SSD0?ref_=ast_sto_dp&th=1&psc=1",
+      "url": "product url here",
       "maxPrice": 100.0,
-      "accountEmail": "superwario89@hotmail.com",
-      "accountPasswordEnc": "Familyiseverything!",
+      "accountEmail": "amazon email here",
+      "accountPassword": "amazon password here",
       "type": "amazonProduct",
-      "mailTo":"superwario89@hotmail.com"
-    },
-    {
-      "title": "test2",
-      "url": "https://www.amazon.it/AmazonBasics-velocit%C3%A0-supporta-Ethernet-standard/dp/B014I8SSD0?ref_=ast_sto_dp&th=1&psc=1",
-      "maxPrice": 100.0,
-      "accountEmail": "superwario89@hotmail.com",
-      "accountPasswordEnc": "Familyiseverything!",
-      "type": "amazonProduct",
-      "mailTo":"superwario89@hotmail.com"
-    },
-    {
-      "title": "test3",
-      "url": "https://www.amazon.it/AmazonBasics-velocit%C3%A0-supporta-Ethernet-standard/dp/B014I8SSD0?ref_=ast_sto_dp&th=1&psc=1",
-      "maxPrice": 100.0,
-      "accountEmail": "superwario89@hotmail.com",
-      "accountPasswordEnc": "Familyiseverything!",
-      "type": "amazonProduct",
-      "mailTo":"superwario89@hotmail.com"
+      "mailTo":"confirmation mail sent here"
     }
   ],
-  "mailFrom": "test@gmail.com",
+  "mailFrom": "amazon_bot@noreply.com",
   "buyJustOne": true
 }

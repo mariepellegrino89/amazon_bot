@@ -18,7 +18,7 @@ public class AmazonProduct extends Product implements VisitableProduct {
 
 
     private String accountEmail;
-    private String accountPasswordEnc;
+    private String accountPassword;
 
     @Override
     public void accept(AmazonBotConfig amazonBotConfig, AutoBuyBotVisitor autoBuyBotVisitor, EmailServiceImpl emailService, ExecutorService executor, AmazonProductUtils amazonProductUtils) {

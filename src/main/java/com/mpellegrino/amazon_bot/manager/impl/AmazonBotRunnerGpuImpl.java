@@ -5,11 +5,14 @@ import com.mpellegrino.amazon_bot.bean.product.Product;
 import com.mpellegrino.amazon_bot.manager.runnable.ProductRunnable;
 import com.mpellegrino.amazon_bot.manager.interf.AmazonBotRunner;
 import com.mpellegrino.amazon_bot.utils.AmazonProductUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -20,6 +23,11 @@ import java.util.stream.Collectors;
 @Service
 public class AmazonBotRunnerGpuImpl implements AmazonBotRunner {
 
+
+    @Value("${spring.mail.username}")
+    private String mailDev;
+
+    public static Boolean errorHasBeenNotified = false;
 
 
     @Autowired
@@ -45,7 +53,7 @@ public class AmazonBotRunnerGpuImpl implements AmazonBotRunner {
         //if product list is empty exit the while cycle
         while (!amazonBotConfig.getProducts().isEmpty()) {
             for (Product p : amazonBotConfig.getProducts()) {
-                Thread.sleep(5000L);
+                Thread.sleep(2000L);
                 //if thread pool limit has been reached skip this
                 int activeCount = ((ThreadPoolExecutor) executor).getActiveCount();
                 List<Product> products = Collections.synchronizedList(amazonBotConfig.getProducts());
@@ -58,7 +66,7 @@ public class AmazonBotRunnerGpuImpl implements AmazonBotRunner {
                         break;
                     }
                     //create and execute thread
-                    ProductRunnable productRunnable = new ProductRunnable(amazonBotConfig, p, emailService, executor, amazonProductUtils);
+                    ProductRunnable productRunnable = new ProductRunnable(amazonBotConfig, p, emailService, executor, amazonProductUtils, errorHasBeenNotified, mailDev);
                     try {
                         executor.execute(productRunnable);
                     }catch (Exception e){
