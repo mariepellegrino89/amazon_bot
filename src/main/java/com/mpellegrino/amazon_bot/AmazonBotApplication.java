@@ -19,9 +19,11 @@ import java.util.stream.Collectors;
 public class AmazonBotApplication implements CommandLineRunner {
 
 
-    @Autowired
-    private AmazonBotRunnerGpuImpl amazonBotRunnerGpu;
+    private final AmazonBotRunnerGpuImpl amazonBotRunnerGpu;
 
+    public AmazonBotApplication(AmazonBotRunnerGpuImpl amazonBotRunnerGpu) {
+        this.amazonBotRunnerGpu = amazonBotRunnerGpu;
+    }
 
 
     public static void main(String[] args) {
