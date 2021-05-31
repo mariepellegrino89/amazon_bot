@@ -30,9 +30,6 @@ public class ContextConfig {
         PolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator.builder().build();
         objectMapper.activateDefaultTyping(ptv, ObjectMapper.DefaultTyping.JAVA_LANG_OBJECT);
         AmazonBotConfig amazonBotConfig = objectMapper.readValue(new File("src/main/resources/gpu_bot_config.json"), AmazonBotConfig.class);
-        amazonBotConfig.getProducts().forEach(pr -> {
-            pr.setChromeDriver(new ChromeDriver());
-        });
         logger.info(amazonBotConfig.toString());
         return amazonBotConfig;
     }

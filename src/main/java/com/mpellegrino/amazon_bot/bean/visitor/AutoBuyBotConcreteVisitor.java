@@ -8,6 +8,8 @@ import com.mpellegrino.amazon_bot.utils.AmazonOrderAndBuyResponse;
 import com.mpellegrino.amazon_bot.utils.AmazonProductUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ExecutorService;
@@ -18,16 +20,19 @@ public class AutoBuyBotConcreteVisitor implements AutoBuyBotVisitor{
     public static Logger logger = LogManager.getLogger(AutoBuyBotConcreteVisitor.class);
 
 
+
     @Override
-    public void visit(AmazonBotConfig amazonBotConfig, AmazonProduct product, EmailServiceImpl emailService, ExecutorService executor) {
+    public void visit(AmazonBotConfig amazonBotConfig, AmazonProduct product, EmailServiceImpl emailService, ExecutorService executor, AmazonProductUtils amazonProductUtils) {
         logger.info("Starting for item {}", product.getTitle());
+        product.setChromeDriver(new ChromeDriver());
         product.getChromeDriver().get(product.getUrl());
         try {
-            if (AmazonProductUtils.checkPriceAndSeller(product)) {
-                AmazonProductUtils.login(product);
-                AmazonOrderAndBuyResponse amazonOrderAndBuyResponse = AmazonProductUtils.orderAndBuy(amazonBotConfig, product, executor);
+            if (amazonProductUtils.checkPriceAndSeller(product)) {
+                amazonProductUtils.login(product);
+                AmazonOrderAndBuyResponse amazonOrderAndBuyResponse = amazonProductUtils.orderAndBuy(amazonBotConfig, product, executor);
                 if(amazonOrderAndBuyResponse.isAnotherItemBoughtInAnotherThread()){
                     logger.info("An item has been bought in another thread, returning {}", product.getTitle());
+                    product.getChromeDriver().close();
                     return;
                 }
                 product.setBought(true);

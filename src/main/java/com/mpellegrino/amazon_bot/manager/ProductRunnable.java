@@ -5,13 +5,12 @@ import com.mpellegrino.amazon_bot.bean.product.Product;
 import com.mpellegrino.amazon_bot.bean.visitor.AutoBuyBotConcreteVisitor;
 import com.mpellegrino.amazon_bot.bean.visitor.AutoBuyBotVisitor;
 import com.mpellegrino.amazon_bot.manager.impl.EmailServiceImpl;
+import com.mpellegrino.amazon_bot.utils.AmazonProductUtils;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class ProductRunnable implements Runnable{
 
@@ -22,12 +21,14 @@ public class ProductRunnable implements Runnable{
     private final Product product;
     private final EmailServiceImpl emailService;
     private final ExecutorService executor;
+    private final AmazonProductUtils amazonProductUtils;
 
-    public ProductRunnable(AmazonBotConfig amazonBotConfig, Product product, EmailServiceImpl emailService, ExecutorService executor) {
+    public ProductRunnable(AmazonBotConfig amazonBotConfig, Product product, EmailServiceImpl emailService, ExecutorService executor, AmazonProductUtils amazonProductUtils) {
         this.amazonBotConfig = amazonBotConfig;
         this.product = product;
         this.emailService = emailService;
         this.executor = executor;
+        this.amazonProductUtils = amazonProductUtils;
     }
 
 
@@ -36,8 +37,9 @@ public class ProductRunnable implements Runnable{
     @Override
     public void run() {
         logger.info("Run: "+ Thread.currentThread().getName());
+        //visitor pattern implementation
         AutoBuyBotVisitor autoBuyBotVisitor = new AutoBuyBotConcreteVisitor();
-        product.accept(amazonBotConfig, autoBuyBotVisitor, emailService, executor);
+        product.accept(amazonBotConfig, autoBuyBotVisitor, emailService, executor, amazonProductUtils);
 
     }
 

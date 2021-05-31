@@ -30,5 +30,5 @@
     }
   ],
   "mailFrom": "test@gmail.com",
-  "buyJustOne": false
+  "buyJustOne": true
 }

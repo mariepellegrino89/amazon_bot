@@ -2,12 +2,13 @@ package com.mpellegrino.amazon_bot.bean.visitor;
 
 import com.mpellegrino.amazon_bot.bean.AmazonBotConfig;
 import com.mpellegrino.amazon_bot.manager.impl.EmailServiceImpl;
+import com.mpellegrino.amazon_bot.utils.AmazonProductUtils;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
 public interface VisitableProduct {
 
-    void accept(AmazonBotConfig amazonBotConfig, AutoBuyBotVisitor autoBuyBotVisitor, EmailServiceImpl emailService, ExecutorService executor);
+    //as for now only amazon implementation is working
+    void accept(AmazonBotConfig amazonBotConfig, AutoBuyBotVisitor autoBuyBotVisitor, EmailServiceImpl emailService, ExecutorService executor, AmazonProductUtils amazonProductUtils);
 
 }

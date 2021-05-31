@@ -9,7 +9,6 @@ import lombok.ToString;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Component;
 
-@Data
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -29,6 +28,59 @@ public abstract class Product implements VisitableProduct {
     public SellSource sellSource;
     public String mailTo;
 
-    public Product() {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Double getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(Double maxPrice) {
+        this.maxPrice = maxPrice;
+    }
+
+    public ChromeDriver getChromeDriver() {
+        return chromeDriver;
+    }
+
+    public void setChromeDriver(ChromeDriver chromeDriver) {
+        this.chromeDriver = chromeDriver;
+    }
+
+    public Boolean getBought() {
+        return bought;
+    }
+
+    public void setBought(Boolean bought) {
+        this.bought = bought;
+    }
+
+    public SellSource getSellSource() {
+        return sellSource;
+    }
+
+    public void setSellSource(SellSource sellSource) {
+        this.sellSource = sellSource;
+    }
+
+    public String getMailTo() {
+        return mailTo;
+    }
+
+    public void setMailTo(String mailTo) {
+        this.mailTo = mailTo;
     }
 }
