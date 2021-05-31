@@ -20,8 +20,8 @@ public class BpmPowerProduct extends Product implements VisitableProduct {
     private BPMPowerShippingMode bpmPowerShippingMode;
 
     @Override
-    public void accept(AmazonBotConfig amazonBotConfig, AutoBuyBotVisitor autoBuyBotVisitor, EmailServiceImpl emailService, ExecutorService executor, AmazonProductUtils amazonProductUtils) {
-        autoBuyBotVisitor.visit(amazonBotConfig, this, emailService, executor);
+    public void accept(AmazonBotConfig amazonBotConfig, AutoBuyBotVisitor autoBuyBotVisitor, EmailServiceImpl emailService,  AmazonProductUtils amazonProductUtils) {
+        autoBuyBotVisitor.visit(amazonBotConfig, this, emailService);
     }
 
 }

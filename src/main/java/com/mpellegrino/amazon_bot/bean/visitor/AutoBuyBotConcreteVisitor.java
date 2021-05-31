@@ -21,14 +21,14 @@ public class AutoBuyBotConcreteVisitor implements AutoBuyBotVisitor{
 
 
     @Override
-    public void visit(AmazonBotConfig amazonBotConfig, AmazonProduct product, EmailServiceImpl emailService, ExecutorService executor, AmazonProductUtils amazonProductUtils) {
+    public void visit(AmazonBotConfig amazonBotConfig, AmazonProduct product, EmailServiceImpl emailService, AmazonProductUtils amazonProductUtils) {
         logger.info("Starting for item {}", product.getTitle());
         product.setChromeDriver(new ChromeDriver());
         product.getChromeDriver().get(product.getUrl());
         try {
             if (amazonProductUtils.checkPriceAndSeller(product)) {
                 amazonProductUtils.login(product);
-                AmazonOrderAndBuyResponse amazonOrderAndBuyResponse = amazonProductUtils.orderAndBuy(amazonBotConfig, product, executor);
+                AmazonOrderAndBuyResponse amazonOrderAndBuyResponse = amazonProductUtils.orderAndBuy(amazonBotConfig, product);
                 if(amazonOrderAndBuyResponse.isAnotherItemBoughtInAnotherThread()){
                     logger.info("An item has been bought in another thread, returning {}", product.getTitle());
                     product.getChromeDriver().close();
@@ -48,7 +48,7 @@ public class AutoBuyBotConcreteVisitor implements AutoBuyBotVisitor{
     }
 
     @Override
-    public void visit(AmazonBotConfig amazonBotConfig, BpmPowerProduct bpmPowerProduct, EmailServiceImpl emailService, ExecutorService executor) {
+    public void visit(AmazonBotConfig amazonBotConfig, BpmPowerProduct bpmPowerProduct, EmailServiceImpl emailService) {
 
     }
 

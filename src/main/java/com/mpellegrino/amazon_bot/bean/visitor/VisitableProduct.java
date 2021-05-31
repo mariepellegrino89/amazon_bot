@@ -9,6 +9,6 @@ import java.util.concurrent.ExecutorService;
 public interface VisitableProduct {
 
     //as for now only amazon implementation is working
-    void accept(AmazonBotConfig amazonBotConfig, AutoBuyBotVisitor autoBuyBotVisitor, EmailServiceImpl emailService, ExecutorService executor, AmazonProductUtils amazonProductUtils);
+    void accept(AmazonBotConfig amazonBotConfig, AutoBuyBotVisitor autoBuyBotVisitor, EmailServiceImpl emailService, AmazonProductUtils amazonProductUtils);
 
 }

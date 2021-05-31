@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 
 public interface AutoBuyBotVisitor {
 
-    void visit(AmazonBotConfig amazonBotConfig, AmazonProduct amazonProduct, EmailServiceImpl emailService, ExecutorService executor, AmazonProductUtils amazonProductUtils);
-    void visit(AmazonBotConfig amazonBotConfig, BpmPowerProduct bpmPowerProduct, EmailServiceImpl emailService, ExecutorService executor);
+    void visit(AmazonBotConfig amazonBotConfig, AmazonProduct amazonProduct, EmailServiceImpl emailService, AmazonProductUtils amazonProductUtils);
+    void visit(AmazonBotConfig amazonBotConfig, BpmPowerProduct bpmPowerProduct, EmailServiceImpl emailService);
 
 }

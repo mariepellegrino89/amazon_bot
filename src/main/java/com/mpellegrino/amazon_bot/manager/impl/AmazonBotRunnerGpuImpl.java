@@ -2,17 +2,14 @@ package com.mpellegrino.amazon_bot.manager.impl;
 
 import com.mpellegrino.amazon_bot.bean.common.AmazonBotConfig;
 import com.mpellegrino.amazon_bot.bean.product.Product;
-import com.mpellegrino.amazon_bot.manager.runnable.ProductRunnable;
 import com.mpellegrino.amazon_bot.manager.interf.AmazonBotRunner;
+import com.mpellegrino.amazon_bot.manager.runnable.ProductRunnable;
 import com.mpellegrino.amazon_bot.utils.AmazonProductUtils;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -30,18 +27,21 @@ public class AmazonBotRunnerGpuImpl implements AmazonBotRunner {
     public static Boolean errorHasBeenNotified = false;
 
 
-    @Autowired
-    private AmazonBotConfig amazonBotConfig;
+    private final AmazonBotConfig amazonBotConfig;
 
-    @Autowired
-    private EmailServiceImpl emailService;
+    private final EmailServiceImpl emailService;
 
-    @Autowired
-    private AmazonProductUtils amazonProductUtils;
+    private final AmazonProductUtils amazonProductUtils;
 
 
 
     public static Logger logger = LogManager.getLogger(AmazonBotRunnerGpuImpl.class);
+
+    public AmazonBotRunnerGpuImpl(AmazonBotConfig amazonBotConfig, EmailServiceImpl emailService, AmazonProductUtils amazonProductUtils) {
+        this.amazonBotConfig = amazonBotConfig;
+        this.emailService = emailService;
+        this.amazonProductUtils = amazonProductUtils;
+    }
 
 
     @Override
@@ -66,7 +66,7 @@ public class AmazonBotRunnerGpuImpl implements AmazonBotRunner {
                         break;
                     }
                     //create and execute thread
-                    ProductRunnable productRunnable = new ProductRunnable(amazonBotConfig, p, emailService, executor, amazonProductUtils, errorHasBeenNotified, mailDev);
+                    ProductRunnable productRunnable = new ProductRunnable(amazonBotConfig, p, emailService, amazonProductUtils, errorHasBeenNotified, mailDev);
                     try {
                         executor.execute(productRunnable);
                     }catch (Exception e){
@@ -89,7 +89,7 @@ public class AmazonBotRunnerGpuImpl implements AmazonBotRunner {
         boolean allToBuyAndAllBought = (amazonBotConfig.getBuyJustOne() == null || !amazonBotConfig.getBuyJustOne()) && amazonBotConfig.getProducts().stream().allMatch(pr-> pr.getBought()!=null && pr.getBought());
         logger.info("Condition justOneToBuyAndBought {}, condition allToBuyAndAllBought {}", justOneToBuyAndBought, allToBuyAndAllBought);
         amazonBotConfig.getProducts().removeIf(p-> p.getBought()!=null && p.getBought());
-        logger.info("Removed items for been bought, items remaining in the list are {}", amazonBotConfig.getProducts().toString());
+        logger.info("Bought items have been removed, items remaining in the list are {}", amazonBotConfig.getProducts().toString());
         return justOneToBuyAndBought || allToBuyAndAllBought;
     }
 

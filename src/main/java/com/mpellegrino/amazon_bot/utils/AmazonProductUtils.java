@@ -11,7 +11,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -24,16 +23,19 @@ import java.util.stream.Collectors;
 @Component
 public class AmazonProductUtils {
 
-    @Autowired
-    private EmailServiceImpl emailService;
+    private final EmailServiceImpl emailService;
 
     @Value("${spring.mail.username}")
     private String mailDev;
 
     public static Logger logger = LogManager.getLogger(AmazonProductUtils.class);
 
+    public AmazonProductUtils(EmailServiceImpl emailService) {
+        this.emailService = emailService;
+    }
 
-    public AmazonOrderAndBuyResponse orderAndBuy(AmazonBotConfig amazonBotConfig, AmazonProduct product, ExecutorService executor) {
+
+    public AmazonOrderAndBuyResponse orderAndBuy(AmazonBotConfig amazonBotConfig, AmazonProduct product) {
         AmazonOrderAndBuyResponse amazonOrderAndBuyResponse = new AmazonOrderAndBuyResponse(false, false);
         try {
             logger.info("Order and buy process starting for item {}", product.getTitle());
