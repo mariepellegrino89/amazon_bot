@@ -148,11 +148,11 @@ public class AmazonProductUtils {
             return false;
         }
         Double priceInDouble = Utils.convertPriceToDouble(priceToCheck);
-        boolean soldByAmazon = seller.getText().contains("Venduto e spedito da Amazon.");
+        boolean soldByAmazon = seller.getText().contains("spedito da Amazon.");
         boolean maxPriceMajorThanPrice = priceInDouble.compareTo(product.getMaxPrice()) < 0;
 
         logger.info("For item {} the price is {}, max price is {} and seller is {}", product.getTitle(), product.getMaxPrice(), priceInDouble, seller.getText());
 
-        return soldByAmazon && maxPriceMajorThanPrice;
+        return product.isShippedByAmazonOnly() ? soldByAmazon && maxPriceMajorThanPrice : maxPriceMajorThanPrice;
     }
 }

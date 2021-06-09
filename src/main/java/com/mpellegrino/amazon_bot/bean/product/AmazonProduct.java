@@ -19,6 +19,7 @@ public class AmazonProduct extends Product implements VisitableProduct {
 
     private String accountEmail;
     private String accountPassword;
+    private boolean shippedByAmazonOnly;
 
     @Override
     public void accept(AmazonBotConfig amazonBotConfig, AutoBuyBotVisitor autoBuyBotVisitor, EmailServiceImpl emailService, AmazonProductUtils amazonProductUtils) {

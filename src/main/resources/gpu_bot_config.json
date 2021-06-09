@@ -3,12 +3,13 @@
   "products": [
     {
       "title": "test1",
-      "url": "product url here",
+      "url": "https://www.amazon.it/CCLIFE-Rastrelliera-Verticale-manubri-Doppio/dp/B07S9WZGCS/?_encoding=UTF8&pd_rd_w=gjWsL&pf_rd_p=3f03743b-c518-4eaa-8a2a-be85d38824e3&pf_rd_r=B7D1JDAARE7SVK2J4XFS&pd_rd_r=0da71a3d-93ed-4b09-80d5-514193e5175f&pd_rd_wg=QWJL4&ref_=pd_gw_cr_cartx",
       "maxPrice": 100.0,
       "accountEmail": "amazon email here",
       "accountPassword": "amazon password here",
       "type": "amazonProduct",
-      "mailTo":"confirmation mail sent here"
+      "mailTo":"confirmation mail sent here",
+      "shippedByAmazonOnly": true
     }
   ],
   "mailFrom": "amazon_bot@noreply.com",

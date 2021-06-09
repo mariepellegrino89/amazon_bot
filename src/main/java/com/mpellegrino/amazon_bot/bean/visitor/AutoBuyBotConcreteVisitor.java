@@ -23,8 +23,10 @@ public class AutoBuyBotConcreteVisitor implements AutoBuyBotVisitor{
     @Override
     public void visit(AmazonBotConfig amazonBotConfig, AmazonProduct product, EmailServiceImpl emailService, AmazonProductUtils amazonProductUtils) {
         logger.info("Starting for item {}", product.getTitle());
-        product.setChromeDriver(new ChromeDriver());
-        product.getChromeDriver().get(product.getUrl());
+        if(product.getChromeDriver()==null){
+            product.setChromeDriver(new ChromeDriver());
+            product.getChromeDriver().get(product.getUrl());
+        }
         try {
             if (amazonProductUtils.checkPriceAndSeller(product)) {
                 amazonProductUtils.login(product);
@@ -39,7 +41,7 @@ public class AutoBuyBotConcreteVisitor implements AutoBuyBotVisitor{
                 emailService.sendMail(product.getMailTo(), "Buy confirmation", "The following item has been bought: " + product.getUrl());
                 product.getChromeDriver().close();
             } else {
-                product.getChromeDriver().navigate().refresh();
+                product.getChromeDriver().navigate().to(product.getUrl());
             }
         } catch (Exception e) {
             e.printStackTrace();
