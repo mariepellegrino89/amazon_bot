@@ -28,8 +28,8 @@ public class AutoBuyBotConcreteVisitor implements AutoBuyBotVisitor{
             product.getChromeDriver().get(product.getUrl());
         }
         try {
+            amazonProductUtils.login(product);
             if (amazonProductUtils.checkPriceAndSeller(product)) {
-                amazonProductUtils.login(product);
                 AmazonOrderAndBuyResponse amazonOrderAndBuyResponse = amazonProductUtils.orderAndBuy(amazonBotConfig, product);
                 if(amazonOrderAndBuyResponse.isAnotherItemBoughtInAnotherThread()){
                     logger.info("An item has been bought in another thread, returning {}", product.getTitle());
