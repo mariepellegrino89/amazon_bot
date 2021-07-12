@@ -103,24 +103,23 @@ public class AmazonProductUtils {
     public void login(AmazonProduct product) throws InterruptedException {
         logger.info("Login process starting for item {}", product.getTitle());
         //thread sleep to allow browser to open pages and see buttons
-        Thread.sleep(2000L);
         List<WebElement> loginButtonStatisc = product.getChromeDriver().findElements(By.id("nav-link-accountList-nav-line-1"));
-        Thread.sleep(2000L);
-        Optional<WebElement> accediStatic = loginButtonStatisc.stream().filter(webElement -> webElement.getText().contains("Ciao, Accedi")).findFirst();
+        Optional<WebElement> accediStatic = loginButtonStatisc.stream().filter(webElement -> webElement.getText().equalsIgnoreCase("Ciao, Accedi")).findFirst();
+        if(accediStatic.isPresent()){
+            accediStatic.ifPresent(webElement -> new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(webElement)).click());
+            Thread.sleep(2000L);
+            WebElement inputEmail = product.getChromeDriver().findElement(By.id("ap_email"));
+            inputEmail.sendKeys(product.getAccountEmail());
+            WebElement continueButton = product.getChromeDriver().findElement(By.id("continue"));
+            new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(continueButton)).click();
+            Thread.sleep(2000L);
+            WebElement inputPw = product.getChromeDriver().findElement(By.id("ap_password"));
+            inputPw.sendKeys(product.getAccountPassword());
+            WebElement signInSubmit = product.getChromeDriver().findElement(By.id("signInSubmit"));
+            new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(signInSubmit)).click();
+            logger.info("Login process ended for item {}", product.getTitle());
+        }
 
-        accediStatic.ifPresent(webElement -> new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(webElement)).click());
-
-        Thread.sleep(2000L);
-        WebElement inputEmail = product.getChromeDriver().findElement(By.id("ap_email"));
-        inputEmail.sendKeys(product.getAccountEmail());
-        WebElement continueButton = product.getChromeDriver().findElement(By.id("continue"));
-        new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(continueButton)).click();
-        Thread.sleep(2000L);
-        WebElement inputPw = product.getChromeDriver().findElement(By.id("ap_password"));
-        inputPw.sendKeys(product.getAccountPassword());
-        WebElement signInSubmit = product.getChromeDriver().findElement(By.id("signInSubmit"));
-        new WebDriverWait(product.getChromeDriver(), 10).until(ExpectedConditions.elementToBeClickable(signInSubmit)).click();
-        logger.info("Login process ended for item {}", product.getTitle());
     }
 
     public boolean checkPriceAndSeller(AmazonProduct product) throws InterruptedException {
